@@ -39,10 +39,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  schema:
-                  $ref: '#/components/schemas/JWT'
+                $ref: '#/components/schemas/JWT'
         '400':
           description: Некорректный запрос или пользователь с таким email уже существует
   /actors:
@@ -266,99 +263,89 @@ components:
     Actor:
       type: object
       properties:
-        ID:
-          type: integer
-        FirstName:
+        first_name:
           type: string
-        LastName:
+        last_name:
           type: string
-        Sex:
+        sex:
           type: string
-        DateOfBirth:
+        date_of_birth:
           type: string
           format: date
     ActorWithMovies:
       type: object
       properties:
-        Actor:
+        actor:
           $ref: '#/components/schemas/Actor'
-        Movies:
+        movies:
           type: array
           items:
             $ref: '#/components/schemas/Movie'
     MoviesCreate:
       type: object
       properties:
-        ID:
-          type: integer
-        Name:
+        name:
           type: string
-        Rating:
+        rating:
           type: integer
-        ReleaseDate:
+        release_date:
           type: string
           format: date
-        ActorsID:
+        actors_id:
           type: array
           items:
             type: integer
     Movie:
       type: object
       properties:
-        ID:
-          type: integer
-        Name:
+        name:
           type: string
-        Rating:
+        rating:
           type: integer
-        ReleaseDate:
+        releaseDate:
           type: string
           format: date
     MovieByName:
       type: object
       properties:
-        Name:
+        name:
           type: string
     MovieWithActors:
       type: object
       properties:
-        ID:
-          type: integer
-        Name:
+        name:
           type: string
-        Rating:
+        rating:
           type: integer
-        ReleaseDate:
+        release_date:
           type: string
           format: date
-        Actors:
+        actors:
           type: array
           items:
             $ref: '#/components/schemas/Actor'
     User:
       type: object
       properties:
-        ID:
-          type: integer
-        FirstName:
+        firstName:
           type: string
-        LastName:
+        lastName:
           type: string
-        Email:
+        email:
           type: string
-        Password:
+        password:
           type: string
-        Role:
+        role:
           type: string
     UserAuth:
       type: object
       properties:
-        Email:
+        email:
           type: string
-        Password:
+        password:
           type: string
     JWT:
       type: object
       properties:
-        Token:
+        token:
           type: string
