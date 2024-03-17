@@ -6,16 +6,50 @@ import (
 	"GoDeveloperVK-testTask/utils"
 	"GoDeveloperVK-testTask/utils/database"
 	"GoDeveloperVK-testTask/utils/logger"
+	"database/sql"
+	"fmt"
 	"log/slog"
 	"net/http"
 	"os"
+	"time"
 )
+
+func waitForPostgres(database utils.Database) {
+	dsn := fmt.Sprintf("host=%s port=%s dbname=%s user=%s password=%s sslmode=disable", database.Host, database.Port, database.DBName, database.Username, database.Password)
+
+	maxAttempts := 200
+	attempt := 1
+	for {
+		db, err := sql.Open("postgres", dsn)
+		if err != nil {
+			utils.LOG.Error("Error connecting to PostgreSQL: %v\n", err)
+		} else {
+			defer db.Close()
+
+			if err := db.Ping(); err == nil {
+				utils.LOG.Info("PostgreSQL is up - executing command")
+				break
+			}
+		}
+
+		attempt++
+		if attempt > maxAttempts {
+			utils.LOG.Error("Exceeded max attempts, giving up.")
+			os.Exit(1)
+		}
+
+		utils.LOG.Info("PostgreSQL is unavailable - sleeping for 1 second (attempt %d/%d)\n", attempt, maxAttempts)
+		time.Sleep(1 * time.Second)
+	}
+}
 
 func main() {
 	config := utils.InitConfig("config.json")
 
 	log := logger.SetupLogger(config.Env)
 	log.Info("You are in mode:", slog.String("env", config.Env))
+
+	waitForPostgres(config.Database)
 
 	db, err := database.InitDatabase(
 		config.Database.Host,
