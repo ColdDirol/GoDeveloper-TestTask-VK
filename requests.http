@@ -1,7 +1,7 @@
 #users:
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVtYWlsQGVtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzEwNjY1NTUwfQ==.jp/T9nghicNoTb3WJm5ZbENUfbaFcnGi6h/X7C/2nEM=
 ###
-POST http://localhost:8000/registration
+POST http://localhost:8080/registration
 Content-Type: application/json
 
 {
