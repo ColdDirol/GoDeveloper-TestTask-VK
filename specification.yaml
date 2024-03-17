@@ -1,0 +1,364 @@
+openapi: 3.0.0
+info:
+  title: Actors and Movies API
+  description: API for managing actors and movies
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /login:
+    post:
+      summary: Войти в систему
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAuth'
+      responses:
+        '200':
+          description: Успешный вход в систему
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JWT'
+        '400':
+          description: Некорректный запрос или неверные учетные данные
+  /registration:
+    post:
+      summary: Зарегистрировать нового пользователя
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Пользователь успешно зарегистрирован
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  schema:
+                  $ref: '#/components/schemas/JWT'
+        '400':
+          description: Некорректный запрос или пользователь с таким email уже существует
+  /actors:
+    get:
+      summary: Получить всех актеров
+      responses:
+        '200':
+          description: Успешный запрос
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Actor'
+      security:
+        - JWTAuth: []
+    post:
+      summary: Создать нового актера
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Actor'
+      responses:
+        '200':
+          description: Актер успешно создан
+        '400':
+          description: Некорректный запрос
+      security:
+        - JWTAuth: []
+  /actors/{actorID}:
+    get:
+      summary: Получить актера по ID
+      parameters:
+        - name: actorID
+          in: path
+          required: true
+          description: ID актера
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Информация об актере
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActorWithMovies'
+        '400':
+          description: Некорректный запрос
+      security:
+        - JWTAuth: []
+    put:
+      summary: Обновить информацию об актере
+      parameters:
+        - name: actorID
+          in: path
+          required: true
+          description: ID актера
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Actor'
+      responses:
+        '200':
+          description: Информация об актере обновлена
+        '400':
+          description: Некорректный запрос
+      security:
+        - JWTAuth: []
+    delete:
+      summary: Удалить актера
+      parameters:
+        - name: actorID
+          in: path
+          required: true
+          description: ID актера
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Актер успешно удален
+        '400':
+          description: Некорректный запрос
+      security:
+        - JWTAuth: []
+  /movies:
+    get:
+      summary: Получить все фильмы
+      responses:
+        '200':
+          description: Успешный запрос
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MovieWithActors'
+      security:
+        - JWTAuth: []
+    post:
+      summary: Создать новый фильм
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoviesCreate'
+      responses:
+        '200':
+          description: Фильм успешно создан
+        '400':
+          description: Некорректный запрос
+      security:
+        - JWTAuth: []
+  /movies/{movieID}:
+    put:
+      summary: Обновить информацию о фильме
+      parameters:
+        - name: movieID
+          in: path
+          required: true
+          description: ID фильма
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoviesCreate'
+      responses:
+        '200':
+          description: Информация о фильме обновлена
+        '400':
+          description: Некорректный запрос
+      security:
+        - JWTAuth: []
+    delete:
+      summary: Удалить фильм
+      parameters:
+        - name: movieID
+          in: path
+          required: true
+          description: ID фильма
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Фильм успешно удален
+        '400':
+          description: Некорректный запрос
+      security:
+        - JWTAuth: []
+  /movies/sort/{sortBy}:
+    get:
+      summary: Получить отсортированные фильмы по атрибуту
+      parameters:
+        - name: sortBy
+          in: path
+          required: true
+          description: Атрибут для сортировки фильмов (rating, name, releaseDate)
+          schema:
+            type: string
+            enum: [rating, name, releaseDate]  # Позволяет выбирать только между "rating" / "name" / "releaseDate"
+      responses:
+        '200':
+          description: Отсортированный список фильмов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MovieWithActors'
+        '400':
+          description: Некорректный запрос
+      security:
+        - JWTAuth: []
+  /movies/find/{findBy}:
+    get:
+      summary: Найти фильмы по атрибуту
+      parameters:
+        - name: findBy
+          in: path
+          required: true
+          description: Атрибут для поиска фильмов (movie, actor)
+          schema:
+            type: string
+            enum: [movie, actor]  # Позволяет выбирать только между "movie" и "actor"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovieByName'
+      responses:
+        '200':
+          description: Список найденных фильмов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MovieWithActors'
+        '400':
+          description: Некорректный запрос
+      security:
+        - JWTAuth: []
+components:
+  securitySchemes:
+    JWTAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: "Используйте JWT токен в заголовке Authorization. Пример: Authorization: xxx.yyy.zzz"
+  schemas:
+    Actor:
+      type: object
+      properties:
+        ID:
+          type: integer
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Sex:
+          type: string
+        DateOfBirth:
+          type: string
+          format: date
+    ActorWithMovies:
+      type: object
+      properties:
+        Actor:
+          $ref: '#/components/schemas/Actor'
+        Movies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Movie'
+    MoviesCreate:
+      type: object
+      properties:
+        ID:
+          type: integer
+        Name:
+          type: string
+        Rating:
+          type: integer
+        ReleaseDate:
+          type: string
+          format: date
+        ActorsID:
+          type: array
+          items:
+            type: integer
+    Movie:
+      type: object
+      properties:
+        ID:
+          type: integer
+        Name:
+          type: string
+        Rating:
+          type: integer
+        ReleaseDate:
+          type: string
+          format: date
+    MovieByName:
+      type: object
+      properties:
+        Name:
+          type: string
+    MovieWithActors:
+      type: object
+      properties:
+        ID:
+          type: integer
+        Name:
+          type: string
+        Rating:
+          type: integer
+        ReleaseDate:
+          type: string
+          format: date
+        Actors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Actor'
+    User:
+      type: object
+      properties:
+        ID:
+          type: integer
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Email:
+          type: string
+        Password:
+          type: string
+        Role:
+          type: string
+    UserAuth:
+      type: object
+      properties:
+        Email:
+          type: string
+        Password:
+          type: string
+    JWT:
+      type: object
+      properties:
+        Token:
+          type: string

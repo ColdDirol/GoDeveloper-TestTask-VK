@@ -1,0 +1,124 @@
+#users:
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVtYWlsQGVtYWlsLmNvbTEiLCJyb2xlIjoidXNlciIsImV4cCI6MTcxMDY3MDAzOX0=.CbfHcrtA9J++P3Nw3+XT0ukFP5ClHCs2EFcR+BaZJTg=
+###
+POST http://localhost:8080/registration
+Content-Type: application/json
+
+{
+  "first_name": "mail",
+  "last_name": "mail",
+  "email": "email@email.com1",
+  "password": "password1",
+  "role": "admin"
+}
+
+###
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email": "email@email.com1",
+  "password": "password1"
+}
+
+
+###
+#actors:
+GET http://localhost:8080/actors
+Authorization: {{token}}
+
+###
+GET http://localhost:8080/actors/1
+Authorization: {{token}}
+
+###
+POST http://localhost:8080/actors
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "first_name": "Oleg",
+  "last_name": "ass",
+  "sex": "man",
+  "date_of_birth": "2024-03-16T04:00:13.2505524+03:00"
+}
+
+
+###
+PUT http://localhost:8080/actors/1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "first_name": "Oleg",
+  "last_name": "ПФФ",
+  "sex": "man",
+  "date_of_birth": "2024-03-16T04:00:13.2505524+03:00"
+}
+
+
+###
+DELETE http://localhost:8080/actors/1
+Authorization: {{token}}
+
+
+# movies:
+###
+GET http://localhost:8080/movies
+Authorization: {{token}}
+
+###
+GET http://localhost:8080/movies/sort/rating
+Authorization: {{token}}
+###
+GET http://localhost:8080/movies/sort/name
+Authorization: {{token}}
+###
+GET http://localhost:8080/movies/sort/releaseDate
+Authorization: {{token}}
+
+###
+GET http://localhost:8080/movies/find/movie
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "aaa"
+}
+
+###
+GET http://localhost:8080/movies/find/actor
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "oleg"
+}
+
+###
+POST http://localhost:8080/movies
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "AAA",
+  "rating": 10,
+  "release_date": "2022-03-16T00:00:00Z",
+  "actors_id": [1, 2, 3]
+}
+
+###
+PUT http://localhost:8080/movies/19
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "AAA",
+  "rating": 10,
+  "release_date": "2022-03-16T00:00:00Z",
+  "actors_id": [1, 2, 3, 4]
+}
+
+###
+DELETE http://localhost:8080/movies/12
+Authorization: {{token}}
