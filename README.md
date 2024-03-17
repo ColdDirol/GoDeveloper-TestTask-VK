@@ -5,6 +5,9 @@ docker-compose up --build app
 ```
 
 [Requests examples](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/blob/main/requests.http)
+
 [OpenAPI specification](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/blob/main/specification.yaml)
+
 [JWT logic](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/blob/main/auth/jwt/jwt.go)
+
 [Configuration file](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/blob/main/config.json)
