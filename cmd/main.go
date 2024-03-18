@@ -46,6 +46,7 @@ func waitForPostgres(database utils.Database) {
 
 func main() {
 	config := utils.InitConfig("config.json")
+	//config := utils.InitConfig("local-config.json")
 
 	log := logger.SetupLogger(config.Env)
 	log.Info("You are in mode:", slog.String("env", config.Env))
