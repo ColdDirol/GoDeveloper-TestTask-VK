@@ -1,0 +1,19 @@
+{
+  "env": "dev",
+  "http_server": {
+    "host": "localhost",
+    "port": "8080"
+  },
+  "database": {
+    "host": "localhost",
+    "port": "5432",
+    "username": "postgres",
+    "password": "postgres",
+    "db_name": "postgres",
+    "ssl_mode": "disable"
+  },
+  "auth": {
+    "secret_key": "secret_key",
+    "salt": "salt"
+  }
+}
