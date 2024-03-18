@@ -4,6 +4,27 @@
 ```bash
 docker-compose up --build app
 ```
+* Работает скрипт по ожиданию инициализации базы данных при развертывании в докере. Просьба дождаться выполнения:
+```
+{"time":"2024-03-18T10:10:28.092126727Z","level":"INFO","msg":"Wait for Postgres - waiting","attempt":"1","attempt":"200"}
+{"time":"2024-03-18T10:10:29.09318591Z","level":"INFO","msg":"Wait for Postgres - waiting","attempt":"2","attempt":"200"}
+{"time":"2024-03-18T10:10:30.09421533Z","level":"INFO","msg":"Wait for Postgres - waiting","attempt":"3","attempt":"200"}
+{"time":"2024-03-18T10:10:31.095390433Z","level":"INFO","msg":"Wait for Postgres - waiting","attempt":"4","attempt":"200"}
+{"time":"2024-03-18T10:10:32.09637744Z","level":"INFO","msg":"Wait for Postgres - waiting","attempt":"5","attempt":"200"}
+{"time":"2024-03-18T10:10:33.097711905Z","level":"INFO","msg":"Wait for Postgres - waiting","attempt":"6","attempt":"200"}
+{"time":"2024-03-18T10:10:34.099060299Z","level":"INFO","msg":"Wait for Postgres - waiting","attempt":"7","attempt":"200"}
+{"time":"2024-03-18T10:10:35.100488265Z","level":"INFO","msg":"Wait for Postgres - waiting","attempt":"8","attempt":"200"}
+{"time":"2024-03-18T10:10:36.101815444Z","level":"INFO","msg":"Wait for Postgres - waiting","attempt":"9","attempt":"200"}
+{"time":"2024-03-18T10:10:37.102580435Z","level":"INFO","msg":"Wait for Postgres - waiting","attempt":"10","attempt":"200"}
+{"time":"2024-03-18T10:10:38.103867799Z","level":"INFO","msg":"Wait for Postgres - waiting","attempt":"11","attempt":"200"}
+{"time":"2024-03-18T10:10:39.105010637Z","level":"INFO","msg":"Wait for Postgres - waiting","attempt":"12","attempt":"200"}
+{"time":"2024-03-18T10:10:40.106179856Z","level":"INFO","msg":"Wait for Postgres - waiting","attempt":"13","attempt":"200"}
+{"time":"2024-03-18T10:10:41.107630625Z","level":"INFO","msg":"Wait for Postgres - waiting","attempt":"14","attempt":"200"}
+```
+```
+{"time":"2024-03-18T10:10:42.159786814Z","level":"INFO","msg":"PostgreSQL is up - executing command"}
+{"time":"2024-03-18T10:10:42.331774266Z","level":"INFO","msg":"Server start listening on port: ","port":"8080"}
+```
 
 ## Навигация
 * [Requests example](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/blob/main/requests.http)
