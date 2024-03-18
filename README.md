@@ -6,13 +6,15 @@ docker-compose up --build app
 ```
 
 ## Навигация
-[Requests example](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/blob/main/requests.http)
+* [Requests example](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/blob/main/requests.http)
 
-[OpenAPI specification](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/blob/main/specification.yaml)
+* [OpenAPI specification](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/blob/main/specification.yaml)
 
-[JWT logic](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/blob/main/auth/jwt/jwt.go)
+* [JWT logic](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/blob/main/auth/jwt/jwt.go)
 
-[Configuration file](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/blob/main/config.json)
+* [Configuration file](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/blob/main/config.json)
+
+* [Init-test](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/tree/main/tests)
 
 ## Правила конфигурации
 ### Конфигурационный файл
