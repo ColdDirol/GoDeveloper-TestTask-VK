@@ -11,6 +11,7 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -38,7 +39,7 @@ func waitForPostgres(database utils.Database) {
 			os.Exit(1)
 		}
 
-		utils.LOG.Info("PostgreSQL is unavailable - sleeping for 1 second (attempt %d/%d)\n", attempt, maxAttempts)
+		utils.LOG.Info("PostgreSQL is unavailable - wait", slog.String("attempt", strconv.Itoa(attempt)), slog.String("attempt", strconv.Itoa(maxAttempts)))
 		time.Sleep(1 * time.Second)
 	}
 }
