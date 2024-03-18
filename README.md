@@ -107,4 +107,4 @@ docker-compose up --build app
 ```
 `secret_key` - secret key для составления jwt токена
 
-`salt` - солб при шифровании пароля в *SHA256*
+`salt` - соль, используемая при шифровании пароля в *SHA256*
