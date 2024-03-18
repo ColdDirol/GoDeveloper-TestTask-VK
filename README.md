@@ -1,4 +1,4 @@
-# GoDeveloper-TestTask-VK
+# Профильное задание на Go-разработчика в VK Tech
 
 ```bash
 docker-compose up --build app
