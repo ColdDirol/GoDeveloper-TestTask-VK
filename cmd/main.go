@@ -19,7 +19,7 @@ func waitForPostgres(database utils.Database) {
 	dsn := fmt.Sprintf("host=%s port=%s dbname=%s user=%s password=%s sslmode=disable", database.Host, database.Port, database.DBName, database.Username, database.Password)
 
 	maxAttempts := 200
-	attempt := 1
+	attempt := 0
 	for {
 		db, err := sql.Open("postgres", dsn)
 		if err != nil {
