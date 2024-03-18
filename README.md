@@ -4,7 +4,7 @@
 docker-compose up --build app
 ```
 
-[Requests examples](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/blob/main/requests.http)
+[Requests example](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/blob/main/requests.http)
 
 [OpenAPI specification](https://github.com/ColdDirol/GoDeveloper-TestTask-VK/blob/main/specification.yaml)
 
